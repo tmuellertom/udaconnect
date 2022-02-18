@@ -1,0 +1,6 @@
+The frontend uses REST API to interact with the Connection microservice. The further conenction to the Persion micoservice is also done via REST because the amount of data is not that high as the other services and the implementation does not require so much ressources like KAFKA.
+
+The Mobile phone sends data to the Location event service via grpc which are validated and stored in KAFKA. In this case the mobile phone can send a hugh amount of locations to the microservice without any efficency loss.
+To use the location data within the frontend the location processor will store the data in the database.
+
+In this szenario all servies are refactored as microservices with the needed techniques.

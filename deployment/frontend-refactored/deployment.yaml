@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: udaconnect-app-refactored
+  name: udaconnect-app-refactored
+spec:
+  ports:
+  - name: "3000"
+    port: 3000
+    targetPort: 3000
+    nodePort: 30000
+  selector:
+    service: udaconnect-app-refactored
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: udaconnect-app-refactored
+  name: udaconnect-app-refactored
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: udaconnect-app-refactored
+  template:
+    metadata:
+      labels:
+        service: udaconnect-app-refactored
+    spec:
+      containers:
+      - image: psysaar/udaconnect-frontend-refactored
+        name: udaconnect-app-refactored
+        imagePullPolicy: Always
+      restartPolicy: Always

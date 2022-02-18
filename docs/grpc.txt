@@ -1,0 +1,24 @@
+General request looks like in the .proto file:
+
+message EventCoordinatesMessage {
+  int32 userId = 1;
+  int32 latitude = 2;
+  int32 longitude = 3;
+}
+
+service ItemService {
+  rpc Create(EventCoordinatesMessage) returns (EventCoordinatesMessage);
+}
+
+Specific example:
+
+channel = grpc.insecure_channel("127.0.0.1:5005")
+stub = event_pb2_grpc.ItemServiceStub(channel)
+
+user_coordinates = event_pb2.EventCoordinatesMessage(
+    userId=300,
+    latitude=-100,
+    longitude=30
+)
+
+stub.Create(user_coordinates)
